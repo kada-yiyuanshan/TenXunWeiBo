@@ -10,9 +10,8 @@
 #import "TokenDataBase.h"
 #import "TokenDataBaseHelp.h"
 
-@interface U_GB_Controller : UIViewController<UINavigationBarDelegate,UINavigationControllerDelegate,UITableViewDataSource,UITableViewDelegate,NSURLConnectionDelegate,NSURLConnectionDataDelegate>
+@interface U_GB_Controller : UIViewController<UITableViewDataSource,UITableViewDelegate,NSURLConnectionDelegate,NSURLConnectionDataDelegate>
 {
-    IBOutlet UINavigationItem *my_gb_bar;
     UITableView *tableview;
     UITableViewCell *tableviewcell;
     float height;

@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "TokenDataBase.h"
 #import "TokenDataBaseHelp.h"
+#import <QuartzCore/QuartzCore.h>
 
-@interface U_ST_Controller : UIViewController<UINavigationBarDelegate,UITableViewDataSource,UITableViewDelegate>
+@interface U_ST_Controller : UIViewController<UITableViewDataSource,UITableViewDelegate>
 {
-    IBOutlet UINavigationItem *item;
     UITableView *tableview;
     NSInteger morecounts;
     NSInteger pages;

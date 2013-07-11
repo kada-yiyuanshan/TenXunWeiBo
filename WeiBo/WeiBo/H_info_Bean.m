@@ -9,21 +9,22 @@
 #import "H_info_Bean.h"
 
 @implementation H_info_Bean
+
 @synthesize from,nick,head,origtext,timestamp;
 @synthesize source_image,source_nick,source_origtext,source_head;
-
+@synthesize orig_id;
 -(void)dealloc
 {
     [super dealloc];
-    [from release];
-    [nick release];
-    [head release];
-    [origtext release];
-    [timestamp release];
-    [source_nick release];
-    [source_image release];
-    [source_origtext release];
-    [source_head release];
+    //[from release];
+    //[nick release];
+    //[head release];
+   // [origtext release];
+   // [timestamp release];
+   // [source_nick release];
+   // [source_image release];
+   // [source_origtext release];
+  //  [source_head release];
 }
 
 @end

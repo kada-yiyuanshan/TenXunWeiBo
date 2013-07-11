@@ -19,19 +19,19 @@
 
 @implementation U_infoController
 
-@synthesize info;
+
 @synthesize im_bg;
 @synthesize nick,introduction;
 @synthesize info_arry;
 @synthesize updata_info_arry;
 @synthesize token_arry;
-@synthesize progressInd;
+//@synthesize progressInd;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        self.title=@"修改资料";
     }
     return self;
 }
@@ -39,7 +39,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    head_view.layer.cornerRadius=8;
+    head_view.layer.masksToBounds = YES;
     [self setBarItem];
     [self info_data];
     [self introduction_text_hi];
@@ -50,20 +51,27 @@
     U_info_Bean *infos=[self.info_arry objectAtIndex:0];
     self.nick.text=infos.u_nick;
     self.introduction.text=infos.introduction;
+    if ([infos.u_head isEqualToString:@""]) {
+        UIImageView *head=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"defaultThunmbnail.png" ]];
+        [head setFrame:CGRectMake(0,0,62,62)];
+        [head_view addSubview:head];
+        [head release];
+    }else{
     AsyncImageView *asyncimageview0= [[AsyncImageView alloc] initWithFrame:CGRectMake(0,0,69.0, 66.0)];
-    asyncimageview0.layer.cornerRadius=8;
+    
     NSString *a=[NSString stringWithFormat:@"%@/50",infos.u_head];
     [asyncimageview0 loadImageFromURL:[NSURL URLWithString:a] land:NO];
     [head_view addSubview:asyncimageview0];
     [asyncimageview0 release];
+    }
 }
 -(void)setBarItem
 {
     self.im_bg.layer.cornerRadius=8;
     UIBarButtonItem *u_info=[[UIBarButtonItem alloc] initWithTitle:@"资料" style:UIBarButtonItemStyleBordered target:self action:@selector(back:)];
-    self.info.leftBarButtonItem =u_info;
+    self.navigationItem.leftBarButtonItem =u_info;
     UIBarButtonItem *save=[[UIBarButtonItem alloc] initWithTitle:@"保存 " style:UIBarButtonItemStyleBordered target:self action:@selector(save:)];
-    self.info.rightBarButtonItem =save;
+    self.navigationItem.rightBarButtonItem =save;
     [u_info release];
     [save release];
 }
@@ -100,7 +108,7 @@
 
 -(IBAction)back:(id)sender
 {
-    [self dismissModalViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)introduction_text_hi
@@ -196,8 +204,8 @@
 }
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-         [self.progressInd stopAnimating];
-          self.progressInd.hidden=YES;
+//         [self.progressInd stopAnimating];
+//          self.progressInd.hidden=YES;
 }
 - (void)handleError:(NSError *)error
 {
@@ -216,10 +224,9 @@
     [im_bg release];
     [nick release];
     [introduction release];
-    [info release];
     [updata_info_arry release];
     [token_arry release];
-    [progressInd release];
+//    [progressInd release];
     
 }
 @end

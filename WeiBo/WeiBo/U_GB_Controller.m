@@ -34,7 +34,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        self.title=@"我的广播";
     }
     return self;
 }
@@ -43,7 +43,7 @@
 {
     [super viewDidLoad];
     UIBarButtonItem *u_info=[[UIBarButtonItem alloc] initWithTitle:@"资料" style:UIBarButtonItemStyleBordered target:self action:@selector(back:)];
-    my_gb_bar.leftBarButtonItem =u_info;
+    self.navigationItem.leftBarButtonItem =u_info;
     [u_info release];
 }
 
@@ -171,12 +171,11 @@
 
 -(IBAction)back:(id)sender
 {
-    [self dismissModalViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 -(void)dealloc
 {

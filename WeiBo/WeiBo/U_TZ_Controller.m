@@ -31,7 +31,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        self.title=@"听众";
     }
     return self;
 }
@@ -70,12 +70,12 @@
 -(void)nav_Item
 {
     UIBarButtonItem *u_info=[[UIBarButtonItem alloc] initWithTitle:@"资料" style:UIBarButtonItemStyleBordered target:self action:@selector(back:)];
-    item.leftBarButtonItem =u_info;
+    self.navigationItem.leftBarButtonItem =u_info;
     [u_info release];
 }
 -(IBAction)back:(id)sender
 {
-    [self dismissModalViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 #pragma tableview
 
@@ -134,6 +134,8 @@
             NSString *a=[NSString stringWithFormat:@"%@/50",bean_.head];
             [asyncimageview0 loadImageFromURL:[NSURL URLWithString:a] land:NO];
             [cell.f_head addSubview:asyncimageview0];
+            cell.f_head.layer.cornerRadius=8;
+            cell.f_head.layer.masksToBounds = YES;
             [asyncimageview0 release];
         }
         if ([bean_.isidol isEqualToString:@"true"]) {

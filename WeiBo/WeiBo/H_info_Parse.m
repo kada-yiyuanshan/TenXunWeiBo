@@ -90,39 +90,36 @@
                             {
                                 NSString *cur4_name = [NSString stringWithUTF8String:(char *)cur4_node->name];
                                 if ([@"head" isEqual:cur4_name]) {
-                                    if (cur3_node->children != nil)  {
+                                    if (cur4_node->children != nil)  {
                                         NSString * content = [NSString stringWithUTF8String:(char *)cur4_node->children->content];
                                         comment.source_head =content;
                                         
                                     }else {
                                         comment.source_head=@"";
                                     }
-                                }else if ([@"image" isEqual:cur4_name]) {
-                                    if (cur3_node->children != nil)  {
-                                        NSString * content = [NSString stringWithUTF8String:(char *)cur4_node->children->content];
-                                        comment.source_image =content;
-                                        
-                                    }else {
-                                        comment.source_head=@"";
-                                    }
                                 }else if ([@"nick" isEqual:cur4_name]) {
-                                    if (cur3_node->children != nil)  {
+                                    if (cur4_node->children != nil)  {
                                         NSString * content = [NSString stringWithUTF8String:(char *)cur4_node->children->content];
                                         comment.source_nick =content;
                                         
                                     }else {
                                         comment.source_nick=@"";
                                     }
+                                }else if ([@"image" isEqual:cur4_name]) {
+                                    if (cur4_node->children != nil)  {
+                                        NSString * content = [NSString stringWithUTF8String:(char *)cur4_node->children->content];
+                                        comment.source_image =content;
+                                    }else {
+                                        comment.source_image=@"";
+                                    }
                                 }else if ([@"origtext" isEqual:cur4_name]) {
-                                    if (cur3_node->children != nil)  {
+                                    if (cur4_node->children != nil)  {
                                         NSString * content = [NSString stringWithUTF8String:(char *)cur4_node->children->content];
                                         comment.source_origtext =content;
-                                        
+                                       
                                     }else {
                                         comment.source_origtext=@"";
                                     }
-                                }else{
-                                
                                 }
                             }
                         }else if ([@"timestamp" isEqual:cur3_name]) {
@@ -132,10 +129,18 @@
                             }else {
                                 comment.timestamp=@"";
                             }
+                        }else if ([@"id" isEqual:cur3_name]) {
+                            if (cur3_node->children != nil)  {
+                                NSString * content = [NSString stringWithUTF8String:(char *)cur3_node->children->content];
+                                comment.orig_id =content;
+                            }else {
+                                comment.orig_id=@"";
+                            }
                         }else {
                         }
                         
                     }
+                  //  NSLog(@"origfrom===>%@",comment.from);
                     [_commentArr addObject:comment];
                     [comment release];
                 }

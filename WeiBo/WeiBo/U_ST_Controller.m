@@ -40,7 +40,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+       self.title=@"收听";
     }
     return self;
 }
@@ -83,13 +83,13 @@
 -(void)nav_Item
 {
     UIBarButtonItem *u_info=[[UIBarButtonItem alloc] initWithTitle:@"资料" style:UIBarButtonItemStyleBordered target:self action:@selector(back:)];
-    item.leftBarButtonItem =u_info;
+    self.navigationItem.leftBarButtonItem =u_info;
     [u_info release];
 }
 
 -(IBAction)back:(id)sender
 {
-    [self dismissModalViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma tableview
@@ -151,6 +151,8 @@
             NSString *a=[NSString stringWithFormat:@"%@/50",bean_.head];
             [asyncimageview0 loadImageFromURL:[NSURL URLWithString:a] land:NO];
             [cell.f_head addSubview:asyncimageview0];
+            cell.f_head.layer.cornerRadius=8;
+            cell.f_head.layer.masksToBounds = YES;
             [asyncimageview0 release];
         }
         if ([bean_.isidol isEqualToString:@"true"]) {
@@ -205,7 +207,6 @@
     
     NSString *u_info_url=[NSString stringWithFormat:@"https://open.t.qq.com/api/friends/del"];
     NSString *info_url=[NSString stringWithFormat:@"format=xml&fopenid=%@&oauth_consumer_key=801357018&access_token=%@&openid=%@&clientip=122.193.29.102&oauth_version=2.a&scope=all",u_id,database.access_token,database.openid];
-    NSLog(@"near_string====>%@",u_info_url);
     NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:u_info_url]];
     [urlRequest setHTTPMethod:@"post"];
     [urlRequest setValue:@"xxxxx" forHTTPHeaderField:@"User-Agent"];

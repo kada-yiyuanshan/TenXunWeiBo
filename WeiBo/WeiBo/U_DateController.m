@@ -47,6 +47,7 @@
 {
     [super viewDidLoad];
     self.head_view.layer.cornerRadius=8;
+    self.head_view.layer.masksToBounds = YES;
     self.datahelp =[[TokenDataBaseHelp alloc]init];
     self.database =[[TokenDataBase alloc] init];
     self.token_arry=[[NSMutableArray alloc] init];
@@ -91,35 +92,24 @@
 {
     U_infoController *info=[[U_infoController alloc] initWithNibName:@"U_infoController" bundle:nil];
     info.info_arry=self.info_arry;
-    [self presentViewAnimation:info];
+    info.hidesBottomBarWhenPushed=YES;
+    [self.navigationController pushViewController:info animated:YES];
     [info release];
-}
-#pragma 改变present默认动画
-- (void)presentViewAnimation:(id)sender{
-    //创建动画
-    CATransition *animation = [CATransition animation];
-    //设置属性
-    [animation setDuration:1];
-    //过渡效果
-    [animation setType: kCATransitionFromRight];
-    //过渡方向
-    [animation setSubtype: kCATransitionFromRight];
-    [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
-    //不调用默认动画
-    [self.view.window.layer addAnimation:animation forKey:nil];
-    [self presentViewController:sender animated:YES completion:nil];
 }
 -(IBAction)gbo_bt:(id)sender
 {
     U_GB_Controller *u_gb=[[U_GB_Controller alloc] initWithNibName:@"U_GB_Controller" bundle:nil];
-    [self presentViewAnimation:u_gb];
+    
+    u_gb.hidesBottomBarWhenPushed=YES;
+    [self.navigationController pushViewController:u_gb animated:YES];
     [u_gb release];
 }
 
 -(IBAction)sti_bt:(id)sender
 {
     U_ST_Controller *u_st=[[U_ST_Controller alloc] initWithNibName:@"U_ST_Controller" bundle:nil];
-    [self presentViewAnimation:u_st];
+    u_st.hidesBottomBarWhenPushed=YES;
+    [self.navigationController pushViewController:u_st animated:YES];
     [u_st release];
 }
 
@@ -131,7 +121,8 @@
 -(IBAction)tzh_bt:(id)sender
 {
     U_TZ_Controller *info=[[U_TZ_Controller alloc] initWithNibName:@"U_TZ_Controller" bundle:nil];
-    [self presentViewAnimation:info];
+    info.hidesBottomBarWhenPushed=YES;
+    [self.navigationController pushViewController:info animated:YES];
     [info release];
 }
 
@@ -167,12 +158,20 @@
             U_info_Bean *bean=[self.info_arry objectAtIndex:0];
             self.u_nick.text=bean.u_nick;
             self.u_name.text=[NSString stringWithFormat:@"(@%@)",bean.u_name];
+            if ([bean.u_head isEqualToString:@""]) {
+                UIImageView *head=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"defaultThunmbnail.png" ]];
+                [head setFrame:CGRectMake(0,0,69,69)];
+                [self.head_view addSubview:head];
+                [head release];
+            }else{
+
             AsyncImageView *asyncimageview0= [[AsyncImageView alloc] initWithFrame:CGRectMake(0,0,69.0, 66.0)];
             asyncimageview0.layer.cornerRadius=8;
             NSString *a=[NSString stringWithFormat:@"%@/50",bean.u_head];
             [asyncimageview0 loadImageFromURL:[NSURL URLWithString:a] land:NO];
             [self.head_view addSubview:asyncimageview0];
             [asyncimageview0 release];
+            }
         }
         edit_tableviewcell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         

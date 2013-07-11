@@ -19,6 +19,7 @@
     NSString *source_nick;
     NSString *source_origtext;
     NSString *timestamp;
+    NSString *orig_id;
     
 }
 @property(retain,nonatomic) NSString *from;
@@ -30,7 +31,7 @@
 @property(retain,nonatomic) NSString *source_nick;
 @property(retain,nonatomic) NSString *source_origtext;
 @property(retain,nonatomic) NSString *timestamp;
-
+@property(retain,nonatomic) NSString *orig_id;
 
 
 @end
